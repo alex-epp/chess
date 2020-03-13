@@ -75,7 +75,7 @@ namespace chess {
         int halfmove_clock, fullmove_clock;
         Piece::Colour turn;
     };
-	inline std::wostream& operator << (std::wostream& stream, const BaseBoard& board);
+	std::wostream& operator << (std::wostream& stream, const BaseBoard& board);
 
 	class Board : public BaseBoard {
 	public:

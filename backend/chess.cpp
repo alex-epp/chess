@@ -130,8 +130,6 @@ namespace chess {
     }
 
     std::string BaseBoard::fen() const {
-        if ()
-
         std::string fen;
         for (int r = 7; r >= 0; --r) {
             int space = 0;
@@ -185,7 +183,7 @@ namespace chess {
         return fen;
     }
 
-    inline std::wostream& operator << (std::wostream& stream, const BaseBoard& board) {
+    std::wostream& operator << (std::wostream& stream, const BaseBoard& board) {
         return print_board(stream, board);
     }
 
@@ -335,7 +333,7 @@ namespace chess {
         this->push_move(this->parse_move(from, to, promo_type));
     }
     void Board::push_move(const Move& move) {
-        std::cerr << this->fen() << " " << move.from().uci() << " " << move.to().uci() << " " << this->is_piece_at(move.from()) << std::endl;
+        //std::cerr << this->fen() << " " << move.from().uci() << " " << move.to().uci() << " " << this->is_piece_at(move.from()) << std::endl;
         assert(this->is_piece_at(move.from()));
         assert(this->piece_mailbox.get(move.from()).colour() == Piece::WHITE);
         if (this->is_piece_at(move.to()))
