@@ -3,5 +3,5 @@ file(GLOB SOURCE_LIST
         "*.cpp"
         "*.hpp")
 
-add_executable(backend_tests ${SOURCE_LIST})
-target_link_libraries(backend_tests PRIVATE backend Catch2)
+add_executable(_chess_backend_tests_target ${SOURCE_LIST})
+target_link_libraries(_chess_backend_tests_target PRIVATE _chess_backend_target Catch2)

@@ -30,8 +30,13 @@ if(NOT Catch2_POPULATED)
     add_subdirectory("${catch2_SOURCE_DIR}" "${catch2_BINARY_DIR}")
 endif()
 
+get_directory_property(has_parent PARENT_DIRECTORY)
+
 add_subdirectory("src")
-add_subdirectory("demos")
-add_subdirectory("tests")
+if(NOT has_parent)
+    add_subdirectory("demos")
+    add_subdirectory("tests")
+endif()
 
-
+add_library(chess INTERFACE)
+target_link_libraries(chess INTERFACE _chess_backend_target _chess_engine_target)
