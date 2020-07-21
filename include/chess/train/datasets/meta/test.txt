@@ -1,2 +1,0 @@
-lichess_db_standard_rated_2019-11.pgn
-lichess_db_standard_rated_2019-10.pgn
