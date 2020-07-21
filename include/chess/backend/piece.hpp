@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include <string_view>
+#include <iostream>
 
 namespace chess {
     enum class Colour {
@@ -68,7 +69,7 @@ namespace chess {
 		Colour m_colour;
 	};
 
-	constexpr std::string_view piece_repr(const Piece& piece) noexcept {
+	constexpr std::u8string_view piece_repr(const Piece& piece) noexcept {
 		if (piece == Piece('P'))
 			return u8"\u2659";
 		else if (piece == Piece('N'))

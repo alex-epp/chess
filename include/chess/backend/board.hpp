@@ -677,9 +677,9 @@ namespace chess {
             for (int fi = 0; fi < 8; ++fi) {
                 auto r = to_rank(ri);
                 auto f = to_file(fi);
-                auto piece = board.get_piece_at(Square(f, r));
+                auto repr = piece_repr(board.get_piece_at(Square(f, r)));
 
-                stream << piece_repr(piece);
+                stream << std::string(repr.begin(), repr.end());
             }
             stream << '\n';
         }

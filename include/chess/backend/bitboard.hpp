@@ -12,6 +12,7 @@
 #include <cassert>
 #include <iostream>
 #include <bitset>
+#include <bit>
 
 
 namespace chess {
@@ -263,7 +264,7 @@ namespace chess {
         return utils::byteswap(this->bb);
     }
     inline size_t BitBoard::pop_count() const noexcept {
-        return std::bitset<64>(this->bb).count();
+        return std::popcount(this->bb);
     }
     constexpr BitBoard BitBoard::fill_N_occluded(BitBoard empty) const noexcept {
         BitBoard gen = *this;
