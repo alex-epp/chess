@@ -67,7 +67,7 @@ namespace chess {
         Colour turn;
     };
 
-    inline std::ostream& print_board(std::ostream& stream, const BaseBoard& board);
+    inline std::ostream& print_board(std::ostream& stream, const BaseBoard& board, bool include_labels=false);
     inline std::ostream& operator << (std::ostream& stream, const BaseBoard& board);
 
     class Board : public BaseBoard {
@@ -672,14 +672,22 @@ namespace chess {
     }
 
 
-    inline std::ostream& print_board(std::ostream& stream, const BaseBoard& board) {
+    inline std::ostream& print_board(std::ostream& stream, const BaseBoard& board, bool include_labels) {
         for (int ri = 7; ri >= 0; --ri) {
+            if (include_labels) stream << ri + 1 << ' ';
             for (int fi = 0; fi < 8; ++fi) {
                 auto r = to_rank(ri);
                 auto f = to_file(fi);
                 auto repr = piece_repr(board.get_piece_at(Square(f, r)));
 
                 stream << std::string(repr.begin(), repr.end());
+            }
+            stream << '\n';
+        }
+        if (include_labels) {
+            stream << "  ";
+            for (int fi = 0; fi < 8; ++fi) {
+                stream << char('a' + fi);
             }
             stream << '\n';
         }
