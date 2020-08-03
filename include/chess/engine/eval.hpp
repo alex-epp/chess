@@ -18,16 +18,18 @@ namespace engine {
     }
 
     template <typename E1, typename E2>
-    EvalResult eval(E1& engine, E2& opponent, size_t trials, std::string_view starting_fen = chess::STARTING_FEN) {
+    EvalResult eval(E1 engine, E2 opponent, size_t trials, std::string_view starting_fen = chess::STARTING_FEN) {
         std::vector<std::future<std::tuple<int, int, int>>> results;
         for (size_t i = 0; i < trials; ++i) {
             results.push_back(std::async([=]() {
+                auto e = engine;
+                auto o = opponent;
                 auto board = chess::load_FEN<chess::Board>(starting_fen);
                 while (!is_game_over(board)) {
-                    auto move = engine.move(board);
+                    auto move = e.move(board);
                     board.push_move(move);
                     if (is_game_over(board)) break;
-                    move = opponent.move(board);
+                    move = o.move(board);
                     board.push_move(move);
                 }
                 if (board.is_draw_50_move() || board.is_draw_insufficient_material())
@@ -42,7 +44,7 @@ namespace engine {
         }
 
         EvalResult result = {0, 0, 0};
-        for (auto r : results) {
+        for (auto& r : results) {
             const auto [wins, losses, draws] = r.get();
             result.wins += wins;
             result.losses += losses;
