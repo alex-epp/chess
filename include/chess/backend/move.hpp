@@ -54,6 +54,10 @@ namespace chess {
         [[nodiscard]] constexpr bool operator == (const Move& rhs) const noexcept {
 			return this->m_data == rhs.m_data;
 		}
+
+        [[nodiscard]] inline std::string uci() const noexcept {
+            return this->from().uci() + this->to().uci();
+        }
 	private:
 		unsigned int m_data = 0;
 		static constexpr Piece::Type PROMOTION_TYPES[4] = { Piece::KNIGHT, Piece::BISHOP, Piece::ROOK, Piece::QUEEN };
