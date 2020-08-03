@@ -35,9 +35,9 @@ namespace engine {
                 if (board.is_draw_50_move() || board.is_draw_insufficient_material())
                     return std::make_tuple(0, 0, 1);
                 else if (board.is_check(chess::Colour::WHITE))
-                    return std::make_tuple(1, 0, 0);
-                else if (board.is_check(chess::Colour::BLACK))
                     return std::make_tuple(0, 1, 0);
+                else if (board.is_check(chess::Colour::BLACK))
+                    return std::make_tuple(1, 0, 0);
                 else
                     return std::make_tuple(0, 0, 1);
             }));
